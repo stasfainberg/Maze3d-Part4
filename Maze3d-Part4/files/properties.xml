@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_74" class="java.beans.XMLDecoder">
+ <object class="presenter.Properties">
+  <void property="algoCreate">
+   <string>GrowingTree</string>
+  </void>
+  <void property="algoSolve">
+   <string>BestFirstSearch</string>
+  </void>
+  <void property="uitype">
+   <string>GUI</string>
+  </void>
+ </object>
+</java>

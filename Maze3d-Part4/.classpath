@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="lib"/>
+	<classpathentry kind="src" path="files"/>
+	<classpathentry kind="src" path="images"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry exported="true" kind="lib" path="D:/Dropbox/Files/לימודים/המכללה למנהל/מדעי המחשב/שנה ד/סמסטר קיץ/Java/הפרויקט/שלב ד/01/org.eclipse.swt.win32.win32.x86_64_3.104.2.v20160212-1350.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Dropbox/Files/לימודים/המכללה למנהל/מדעי המחשב/שנה ד/סמסטר קיץ/Java/הפרויקט/שלב ב/Backup/07/Maze3d-Part2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
