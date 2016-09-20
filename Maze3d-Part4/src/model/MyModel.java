@@ -46,9 +46,11 @@ import presenter.Properties;
 /**
  * <h1>MyModel Class</h1>
  * 
- * @author Stas Fainberg This class receives commands from the presenter and
- *         executes them. when the model is done the message is sent to the
- *         presenter
+ * @author Stas Fainberg 
+ * 
+ * This class receives commands from the presenter and
+ * executes them. when the model is done the message is 
+ * sent to the presenter.
  */
 public class MyModel extends Observable implements Model {
 
@@ -141,12 +143,10 @@ public class MyModel extends Observable implements Model {
 
 	/************************* save maze ***********************/
 	/**
-	 * the function save() saving the maze with the name to file with filename
+	 * This function saveMaze() saves the maze with the name to a file.
 	 * 
-	 * @param name
-	 *            - name of the maze
-	 * @param fileName
-	 *            - name of the file
+	 * @param name - name of the maze.
+	 * @param fileName  - name of the file.
 	 */
 	@Override
 	public void saveMaze(String name, String fileName) {
@@ -178,12 +178,10 @@ public class MyModel extends Observable implements Model {
 
 	/************************* load maze ***********************/
 	/**
-	 * the function loadMaze() load a maze from the File
+	 * This function loadMaze() loads a maze from a File.
 	 * 
-	 * @param name
-	 *            - Name of the maze
-	 * @param fileName
-	 *            - Name of the Loaded File
+	 * @param name - Name of the maze which should be loaded.
+	 * @param filename - Name of the loaded File.
 	 * @throws IOException
 	 */
 	@Override
@@ -223,8 +221,9 @@ public class MyModel extends Observable implements Model {
 
 	}
 
-	/*************************
-	 * help method *********************** the function help() print all the
+	/**
+	 * help method 
+	 * This function help() print all the
 	 * commands that the user can enter
 	 */
 	/************ דוגמת הרצה *********/
@@ -499,6 +498,17 @@ public class MyModel extends Observable implements Model {
 	// כשיהיה פתרון המודל יבקש מה controller
 	// להציג
 	// “solution for <name> is ready”
+	/**
+	 * This solveMaze() function solves the maze3d by the given Algorithm DFS or Best First Search.
+	 * 
+	 * 
+	 * @param String name
+	 *            - represents the name of the Maze.
+	 * @param String algorithm-
+	 *            represents the name of the searching Algorithm.
+	 * @param Maze3dPosition pos
+	 *            - represents the current position of the figure.
+	 */
 	@Override
 	public void solveMaze(String name, String algorithm, Maze3dPosition pos) {
 
@@ -716,6 +726,14 @@ public class MyModel extends Observable implements Model {
 		return this.maze3d;
 	}
 
+	
+	
+	
+	
+	/**
+	 * This displaySolution() function prints out a list of all maze3d positions 
+	 * leading to the goal position.
+	 */
 	@Override
 	public void displaySolution(String name) {
 
@@ -732,10 +750,20 @@ public class MyModel extends Observable implements Model {
 
 	}
 
+	
+	
+	
+	
+	
 	public void setMaze3d(Maze3d maze3d) {
 		this.maze3d = maze3d;
 	}
 
+	
+	
+	
+	
+	
 	public void createAlgo() {
 		BestFirstSearch myBestFirstSearch = new BestFirstSearch();
 		DFS myDFS = new DFS();
@@ -743,6 +771,11 @@ public class MyModel extends Observable implements Model {
 		algorithms.put("DFS", myDFS);
 	}
 
+	
+	
+	
+	
+	
 	@Override
 	public void loadFromXml(String name) throws FileNotFoundException {
 		XMLDecoder decoder = null;
@@ -756,10 +789,11 @@ public class MyModel extends Observable implements Model {
 		}
 	}
 
-	public void decode(String fName) {
 
-	}
-
+	
+	
+	
+	
 	@Override
 	public Solution getSol() {
 		return namesToSolution.get(maze3dLastName);
