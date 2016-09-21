@@ -44,9 +44,10 @@ import presenter.Command;
 import presenter.Properties;
 
 /**
- * <h1>MyModel Class</h1>
+ * <h1>MyModel</h1>
  * 
  * @author Stas Fainberg 
+ * @version 1.0
  * 
  * This class receives commands from the presenter and
  * executes them. when the model is done the message is 
