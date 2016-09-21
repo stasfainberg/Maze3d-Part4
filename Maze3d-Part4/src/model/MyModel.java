@@ -29,7 +29,6 @@ import algorithms.mazeGenerators.CommonMaze3dGenerator;
 import algorithms.mazeGenerators.GrowingTreeGenerator;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Maze3dPosition;
-import algorithms.mazeGenerators.Position;
 import algorithms.mazeGenerators.SimpleMaze3dGenerator;
 import algorithms.search.BestFirstSearch;
 import algorithms.search.CommonSearcher;
@@ -73,7 +72,7 @@ public class MyModel extends Observable implements Model {
 	public static int count = 0;
 	private Properties properties;
 	Maze3dPosition startTmpPos;
-
+	Maze3dPosition hintPosition;
 	
 	
 	/***************************************** Constructor ***********************************************/
@@ -120,6 +119,12 @@ public class MyModel extends Observable implements Model {
 	@Override
 	public Solution getSol() {
 		return namesToSolution.get(maze3dLastName);
+	}
+	
+	
+	@Override
+	public Maze3dPosition getHint() {
+		return hintPosition;
 	}
 	
 	/***************************************** Methods ***********************************************/
@@ -584,6 +589,126 @@ public class MyModel extends Observable implements Model {
 	
 	
 	
+	
+	
+	/**
+	 * <h1>hintMaze()</h1>
+	 * This hintMaze() shows the next step the user should take in order to solve the maze.
+	 * on finish it displays a message to the user.
+	 * 
+	 * @param String name
+	 *            - represents the maze name.
+	 * @param Stinrg algorithm
+	 *            - represents the algorithm name.
+	 * @param Maze3dPosition pos
+	 * 			  - represents the current figure position.
+	**/
+
+	@Override
+	public void hintMaze(String name, String algorithm, Maze3dPosition pos) {
+
+		String curName = name;
+		
+		
+		if (curName.equals(""))
+			curName = maze3dLastName;
+
+		if (!mazes.containsKey(curName)) {
+
+			this.message = "Maze '" + curName + "' does not exist";
+			setChanged();
+			notifyObservers("display_message");
+			return;
+		}
+
+		String callName = curName;
+
+		Future<Maze3dPosition> myHintPosition = executor.submit(new Callable<Maze3dPosition>() 
+		{
+
+			@Override
+			public Maze3dPosition call() 
+			{
+				ArrayList<MazeState> states = new ArrayList<MazeState>();
+
+				Maze3d maze = mazes.get(callName);
+				startTmpPos = maze.getStartPosition();
+
+				maze.setStartPosition(pos);
+				MazeAdapter adapter = new MazeAdapter(maze);
+				Searcher search = null;
+				Solution solCall;
+				search = new BestFirstSearch();
+
+				solCall = search.search(adapter);
+				maze.setStartPosition(startTmpPos);
+				sol = solCall;
+				states = sol.getStates();
+				
+				Maze3dPosition tmp = new Maze3dPosition(0, 0, 0);
+				tmp.setFloor(states.get(1).getCurrPlayerPosition().getFloor());
+				tmp.setRows(states.get(1).getCurrPlayerPosition().getRows());
+				tmp.setCols(states.get(1).getCurrPlayerPosition().getCols());
+				
+				
+				hintPosition = new Maze3dPosition(tmp.getFloor(), tmp.getRows(), tmp.getCols()) ;
+				
+				return hintPosition;
+		
+			}
+			
+
+		});
+
+		this.message = "Your hint is ready \n";
+		setChanged();
+		notifyObservers("display_message");
+		displayHint(hintPosition);
+
+	}
+	
+	
+	/**
+	 * <h1>displaySolution()</h1>
+	 * This displaySolution() method initiate the display_maze_solution() method
+	 * in the View layer shows the solution of the maze to the user.
+	 * 
+	 */
+	@Override
+	public void displaySolution(String name) {
+
+		if (!mazes.containsKey(name)) {
+			this.message = "Maze '" + name + "' does not exist";
+			setChanged();
+			notifyObservers("display_message");
+			return;
+		}
+
+		maze3dLastName = name;
+		setChanged();
+		notifyObservers("display_maze_solution");
+
+	}
+	
+	
+	
+	
+	
+	/**
+	 * <h1>displaySolution()</h1>
+	 * This displaySolution() method initiate the display_maze_solution() method
+	 * in the View layer shows the solution of the maze to the user.
+	 * 
+	 */
+	@Override
+	public void displayHint(Maze3dPosition hint1) {
+
+		setChanged();
+		notifyObservers("display_maze_hint");
+
+	}
+	
+	
 	/**
 	 * <h1>Exit()</h1>
 	 * This Exit() method closes all working threads and closes the program.
@@ -748,27 +873,7 @@ public class MyModel extends Observable implements Model {
 
 
 	
-	/**
-	 * <h1>displaySolution()</h1>
-	 * This displaySolution() method initiate the display_maze_solution() method
-	 * in the View layer shows the solution of the maze to the user.
-	 * 
-	 */
-	@Override
-	public void displaySolution(String name) {
-
-		if (!mazes.containsKey(name)) {
-			this.message = "Maze '" + name + "' does not exist";
-			setChanged();
-			notifyObservers("display_message");
-			return;
-		}
-
-		maze3dLastName = name;
-		setChanged();
-		notifyObservers("display_maze_solution");
-
-	}
+	
 
 	
 

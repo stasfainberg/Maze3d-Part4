@@ -124,6 +124,12 @@ public class MyView extends Observable implements View,Observer {
 		}		
 	}
 
+	@Override
+	public void displayMazeHint(Maze3dPosition hint1) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 	

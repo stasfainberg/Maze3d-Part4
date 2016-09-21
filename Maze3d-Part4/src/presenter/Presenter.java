@@ -55,6 +55,7 @@ public class Presenter implements Observer {
 		viewCommands.put("save_maze", new SaveMazeCommand(model, view));
 		viewCommands.put("load_maze", new LoadMazeCommand(model, view));
 		viewCommands.put("solve", new SolveCommand(model, view, prop));
+		viewCommands.put("hint", new HintCommand(model, view));
 		viewCommands.put("display_solution", new DisplaySolutionCommand(model, view));
 		viewCommands.put("exit", new ExitCommand(model, view));
 		viewCommands.put("load_zip", new LoadFromZipCommand(model, view));
@@ -67,8 +68,9 @@ public class Presenter implements Observer {
 		modelCommands.put("display_maze_solution", new DisplayMazeSolutionCommand(model, view));
 		modelCommands.put("display_message", new DisplayMessageCommand(model, view));
 		modelCommands.put("display", new DisplayMaze3DCommand(model, view));
+		modelCommands.put("display_maze_hint", new DisplayMazeHintCommand(model, view));
 
-
+		
 		
 		
 		

@@ -100,6 +100,7 @@ public abstract class  MazeDisplay extends Canvas {
 	protected abstract void goBackward();
 	protected abstract void goUp();
 	protected abstract void goSolution(Solution sol);
+	protected abstract void goToHint(Maze3dPosition hint1);
 
 	public abstract Boolean checkIfGoal(Maze3dPosition pos);
 	public abstract void winGenerator();
@@ -160,6 +161,8 @@ public abstract class  MazeDisplay extends Canvas {
 	public void setSol(Solution sol) {
 		this.sol = sol;
 	}
+
+
 	
 
 }

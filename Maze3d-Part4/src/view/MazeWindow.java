@@ -208,18 +208,13 @@ public class MazeWindow extends BasicWindow implements View {
 		Button btnHintMaze = new Button(toolbar, SWT.PUSH);
 		btnHintMaze.setText("Hint");
 		btnHintMaze.setToolTipText("Click to get a hint");
+		
 		btnHintMaze.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				SolveMazeWindow solveMazeWindow = new SolveMazeWindow(shell, display);
-				solveMazeWindow.initWidgets();
 
-				if (solveMazeWindow.getSearchAlgo() != null) {
-					setChanged();
-					notifyObservers("solve " + "" + solveMazeWindow.getSearchAlgo());
-				} else {
-					return;
-				}
+				setChanged();
+				notifyObservers("hint " + "BestFirstSearch");
 
 			}
 		});
@@ -364,6 +359,13 @@ public class MazeWindow extends BasicWindow implements View {
 	}
 	
 	
+	
+	@Override
+	public void displayMazeHint(Maze3dPosition hint1) {
+		
+		mazeDisplay.goToHint(hint1);
+		
+	}
 	
 
 }

@@ -526,6 +526,45 @@ public class Maze3dDisplay extends MazeDisplay {
 	}
 
 
+	@Override
+	protected void goToHint(Maze3dPosition hint1) {
+		
+		if (this.getCharacter().getPos().getFloor() < hint1.getFloor()) {
+			System.out.println("up");
+			goUp();
+
+		}
+		if (this.getCharacter().getPos().getFloor() > hint1.getFloor()) {
+			System.out.println("down");
+			goDown();
+
+		}
+		if (this.getCharacter().getPos().getRows() < hint1.getRows()) {
+			System.out.println("forward");
+			goForward();
+
+		}
+		if (this.getCharacter().getPos().getRows() > hint1.getRows()) {
+			System.out.println("backward");
+			goBackward();
+
+		}
+		if (this.getCharacter().getPos().getCols() < hint1.getCols()) {
+			System.out.println("right");
+			goRight();
+
+		}
+		if (this.getCharacter().getPos().getCols() > hint1.getCols()) {
+			System.out.println("left");
+			goLeft();
+
+		}
+		
+		
+		
+	}
+
+
 
 	
 	

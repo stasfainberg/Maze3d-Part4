@@ -15,6 +15,7 @@ public interface View {
 	void displayMessage(String message);
 	void Display(Maze3d maze3d);
 	void displayMazeSolution(Solution sol);
+	void displayMazeHint(Maze3dPosition hint1);
 	void start();
 
 	

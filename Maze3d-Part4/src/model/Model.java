@@ -26,14 +26,20 @@ public interface Model {
 	void displayCrossSection();
 	void Exit();
 	void solveMaze(String name, String algorithm, Maze3dPosition pos);
+	void hintMaze(String name, String algorithm, Maze3dPosition pos);
 	void displaySolution(String name);
+	void displayHint(Maze3dPosition hint1);
 	String getMessage();
 	void LoadFromZip(String filename);
 	void SaveToZip(String filename);
 	public Maze3d getMaze3d();
 	void loadFromXml(String name) throws FileNotFoundException;
 	Solution getSol();
+	Maze3dPosition getHint();
 
+	
+	
+	
 }
 
 
