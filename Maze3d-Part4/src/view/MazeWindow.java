@@ -30,9 +30,7 @@ import algorithms.search.Solution;
  */
 public class MazeWindow extends BasicWindow implements View {
 
-	/**********************************
-	 * Data Members
-	 *********************************/
+	/*********************************** Data Members *********************************/
 	private MazeDisplay mazeDisplay;
 	private Maze3d mymaze;
 
@@ -50,7 +48,6 @@ public class MazeWindow extends BasicWindow implements View {
 
 		/************************* General Settings **************************/
 		shell.setSize(600, 500);
-//		shell.setBounds(125, 125, 600, 500);
 		shell.setText("Maze3d Project created by Stas Fainberg");
 
 		GridLayout layout = new GridLayout(2, false);
@@ -59,7 +56,6 @@ public class MazeWindow extends BasicWindow implements View {
 		Image img = new Image( display, "images\\titleImage.jpg");
 		shell.setImage(img);
 
-		// shell.setBackgroundImage(img);
 
 		/***************************** Menu **************************/
 
@@ -319,9 +315,7 @@ public class MazeWindow extends BasicWindow implements View {
 
 	}
 
-	/**************************************
-	 * Setters & Getters
-	 ****************************/
+	/*************************************** Setters & Getters ****************************/
 	public void setCharPosText(String string) {
 		this.charPosText.setText(string);
 	}

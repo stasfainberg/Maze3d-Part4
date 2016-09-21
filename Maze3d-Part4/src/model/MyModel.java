@@ -54,6 +54,8 @@ import presenter.Properties;
  */
 public class MyModel extends Observable implements Model {
 
+	
+	/**************************************** Data Members **********************************/
 	private ArrayList<Thread> threads = new ArrayList<Thread>();
 	private HashMap<String, Maze3d> mazes = new HashMap<String, Maze3d>();
 	private HashMap<Maze3d, Solution> mazeToSol = new HashMap<Maze3d, Solution>();
@@ -70,11 +72,10 @@ public class MyModel extends Observable implements Model {
 	public static int count = 0;
 	private Properties properties;
 	Maze3dPosition startTmpPos;
-	// private static final int threadsNum = 20;
 
-	/**
-	 * Constructor of MyModel
-	 */
+	
+	
+	/***************************************** Constructor ***********************************************/
 	public MyModel(ExecutorService executor) {
 		this.executor = executor;
 		BestFirstSearch BestFirstSearch = new BestFirstSearch();
@@ -90,6 +91,9 @@ public class MyModel extends Observable implements Model {
 		solvealgo.put("Simple", simpleMaze);
 	}
 
+	
+	/*************************************** Getters & Setters *********************************************/
+
 	@Override
 	public Maze3d getMaze(String name) {
 		if (mazes.containsKey(name))
@@ -103,6 +107,22 @@ public class MyModel extends Observable implements Model {
 		return message;
 	}
 
+	@Override
+	public Maze3d getMaze3d() {
+		return this.maze3d;
+	}
+	
+	public void setMaze3d(Maze3d maze3d) {
+		this.maze3d = maze3d;
+	}
+	
+	@Override
+	public Solution getSol() {
+		return namesToSolution.get(maze3dLastName);
+	}
+	
+	/***************************************** Methods ***********************************************/
+	
 	@Override
 	public void generateMaze(String name, int floor, int rows, int cols, String algo) {
 
@@ -141,12 +161,12 @@ public class MyModel extends Observable implements Model {
 
 	}
 
-	/************************* save maze ***********************/
 	/**
-	 * This function saveMaze() saves the maze with the name to a file.
+	 * <h1>saveMaze()</h1>
+	 * This function saveMaze() saves the maze data to a file.
 	 * 
-	 * @param name - name of the maze.
-	 * @param fileName  - name of the file.
+	 * @param String name - name of the maze.
+	 * @param String fileName  - name of the file.
 	 */
 	@Override
 	public void saveMaze(String name, String fileName) {
@@ -176,13 +196,14 @@ public class MyModel extends Observable implements Model {
 		}
 	}
 
-	/************************* load maze ***********************/
+
+	
 	/**
+	 * <h1>loadMaze()</h1>
 	 * This function loadMaze() loads a maze from a File.
 	 * 
-	 * @param name - Name of the maze which should be loaded.
-	 * @param filename - Name of the loaded File.
-	 * @throws IOException
+	 * @param String name - Name of the maze which should be loaded.
+	 * @param String filename - Name of the loaded File.
 	 */
 	@Override
 	public void loadMaze(String filename, String name) {
@@ -221,18 +242,13 @@ public class MyModel extends Observable implements Model {
 
 	}
 
+	
+	
 	/**
-	 * help method 
-	 * This function help() print all the
-	 * commands that the user can enter
-	 */
-	/************ דוגמת הרצה *********/
-	/**
-	 * Such as executables (for example): > Please enter command or 'help': help
+	 * <h1>help()</h1>
+	 * This help() method prints out all commands user can use using the CLI interface.
 	 * 
-	 * > Please type in command according to the list below: > generate maze >
-	 * load Maze > exit > help > display by section > display > file size >
-	 * solve maze > dir > save maze > maze size > display solution
+	 * @param HashMap<String, Command> commands - holds all available commands.
 	 */
 	@Override
 	public void help(HashMap<String, Command> commands) {
@@ -252,8 +268,14 @@ public class MyModel extends Observable implements Model {
 		notifyObservers("display_message");
 	}
 
+	
+	
+	
 	/**
-	 * the function dir() show all the files and directory in the path
+	 * <h1>dir()</h1>
+	 * This dir() method shows all the files and directories in a given path.
+	 * 
+	 * 
 	 */
 	@Override
 	public void dir() {
@@ -325,11 +347,16 @@ public class MyModel extends Observable implements Model {
 
 	}
 
+	
+	
+	
 	/**
-	 * the function display() printing the maze נדפיס למשתמש את המבוך בשם name
+	 * <h1>display()</h1>
+	 * This display() method printing initiates the display() method in the view layer. 
+	 * The display() method in the view layer displays the maze3d to the user.
 	 * 
-	 * @param name
-	 *            - name of the maze
+	 * @param String name
+	 *            - name of the maze.
 	 */
 	@Override
 	public void display(String mazeName) {
@@ -355,19 +382,14 @@ public class MyModel extends Observable implements Model {
 		}
 	}
 
-	/*************************
-	 * displayCroosSection (by x/y/z) method
-	 ***********************/
+	
+	
+
 	/**
-	 * the function displayCroosSection() display the cross section (x/y/z) by
-	 * index as a 2D maze X represents floors Y Represents cols Z Represents
-	 * rows
+	 * <h1>displayCrossSection()</h1>
+	 * This displayCroosSection() displays the cross section (x/y/z) by index
+	 * as a 2D maze X represents floors Y Represents rows and  Z Represents columns.
 	 * 
-	 * @param userLineName
-	 * @param userLineSection
-	 *            - (X/Y/Z) - floors/cols or rows
-	 * @param userLineIndex
-	 *            - index
 	 */
 	@Override
 	public void displayCrossSection() {
@@ -480,42 +502,28 @@ public class MyModel extends Observable implements Model {
 		inputSection.close();
 	}
 
-	/************************* solveMaze method ***********************/
+	
+	
+	
+	
 	/**
-	 * the function solveMaze() Solving the Maze by the given Algorithm BFS,DFS
-	 * or Best First Search
-	 * 
-	 * @param maze
-	 *            - the maze
-	 * @param name
-	 *            - name of Maze
-	 * @param search-
-	 *            searching Algorithm
-	 * @param sol
-	 *            - solution
-	 */
-	// המטודה תפתור את המבוך בת'רד נפרד באמצעות האלגוריתמים (אחד מהם)
-	// כשיהיה פתרון המודל יבקש מה controller
-	// להציג
-	// “solution for <name> is ready”
-	/**
-	 * This solveMaze() function solves the maze3d by the given Algorithm DFS or Best First Search.
-	 * 
+	 * <h1>solveMaze()</h1>
+	 * This solveMaze() solves the Maze by a given Algorithm DFS or Best First Search.
+	 * on finish it displays a message to the user.
 	 * 
 	 * @param String name
-	 *            - represents the name of the Maze.
-	 * @param String algorithm-
-	 *            represents the name of the searching Algorithm.
+	 *            - represents the maze name.
+	 * @param Stinrg algorithm
+	 *            - represents the algorithm name.
 	 * @param Maze3dPosition pos
-	 *            - represents the current position of the figure.
-	 */
+	 * 			  - represents the current figure position.
+	**/
+
 	@Override
 	public void solveMaze(String name, String algorithm, Maze3dPosition pos) {
 
 		String curName = name;
-		
-		
-		
+
 		if (curName.equals(""))
 			curName = maze3dLastName;
 
@@ -535,30 +543,28 @@ public class MyModel extends Observable implements Model {
 			public Solution call() {
 				ArrayList<MazeState> states = new ArrayList<MazeState>();
 
-//				if (!(namesToSolution.containsKey(callName))) {
-					Maze3d maze = mazes.get(callName);
-					startTmpPos = maze.getStartPosition();
+				Maze3d maze = mazes.get(callName);
+				startTmpPos = maze.getStartPosition();
 
-					maze.setStartPosition(pos);
-					MazeAdapter adapter = new MazeAdapter(maze);
-					Searcher search = null;
-					Solution solCall;
-					switch (algorithm) {
-					case "DFS":
-						search = new DFS();
-						break;
-					case "BestFirstSearch":
-						search = new BestFirstSearch();
-						break;
-					default:
-						break;
-					}
-					solCall = search.search(adapter);
-					mazeToSol.put(mazes.get(callName), solCall);
-					namesToSolution.put(callName, solCall);
-					sol = solCall;
-					maze.setStartPosition(startTmpPos);
-//				}
+				maze.setStartPosition(pos);
+				MazeAdapter adapter = new MazeAdapter(maze);
+				Searcher search = null;
+				Solution solCall;
+				switch (algorithm) {
+				case "DFS":
+					search = new DFS();
+					break;
+				case "BestFirstSearch":
+					search = new BestFirstSearch();
+					break;
+				default:
+					break;
+				}
+				solCall = search.search(adapter);
+				mazeToSol.put(mazes.get(callName), solCall);
+				namesToSolution.put(callName, solCall);
+				sol = solCall;
+				maze.setStartPosition(startTmpPos);
 				states = sol.getStates();
 				return sol;
 
@@ -573,9 +579,14 @@ public class MyModel extends Observable implements Model {
 
 	}
 
+	
+	
+	
+	
 	/**
-	 * the function Exit() we closed all the threads are working and close the
-	 * Program
+	 * <h1>Exit()</h1>
+	 * This Exit() method closes all working threads and closes the program.
+	 * 
 	 */
 	@Override
 	public void Exit() {
@@ -588,6 +599,14 @@ public class MyModel extends Observable implements Model {
 
 	}
 
+	
+	
+	/**
+	 * <h1>SaveToZip()</h1>
+	 * This SaveToZip() method saves the maze3d in to a Zip file.
+	 * 
+	 * @param String filename - represents the file name in to which the data will be saved.
+	 */
 	@Override
 	public void SaveToZip(String filename) {
 
@@ -653,6 +672,14 @@ public class MyModel extends Observable implements Model {
 		}
 	}
 
+	
+	
+	/**
+	 * <h1>LoadFromZip()</h1>
+	 * This LoadFromZip() method loads the maze3d data from a file in to the program.
+	 * 
+	 * @param String filename - represents the file name which the data is loaded from.
+	 */
 	@Override
 	public void LoadFromZip(String filename) {
 		Maze3d mymaze = null;
@@ -685,9 +712,6 @@ public class MyModel extends Observable implements Model {
 				count = count * 255;
 				size = size + count;
 				for (int i = 0; i < size; i++) {
-					// int floor = zip.read();
-					// int rows = zip.read();
-					// int cols = zip.read();
 
 					st = new MazeState((Maze3dPosition) camefrom.getCurrPlayerPosition());
 					st.setCost(zip.read());
@@ -721,18 +745,13 @@ public class MyModel extends Observable implements Model {
 
 	}
 
-	@Override
-	public Maze3d getMaze3d() {
-		return this.maze3d;
-	}
 
 	
-	
-	
-	
 	/**
-	 * This displaySolution() function prints out a list of all maze3d positions 
-	 * leading to the goal position.
+	 * <h1>displaySolution()</h1>
+	 * This displaySolution() method initiate the display_maze_solution() method
+	 * in the View layer shows the solution of the maze to the user.
+	 * 
 	 */
 	@Override
 	public void displaySolution(String name) {
@@ -751,19 +770,14 @@ public class MyModel extends Observable implements Model {
 	}
 
 	
-	
-	
-	
-	
-	public void setMaze3d(Maze3d maze3d) {
-		this.maze3d = maze3d;
-	}
 
 	
-	
-	
-	
-	
+	/**
+	 * <h1>createAlgo()</h1>
+	 * This createAlgo() method initiates the solving algorithms and adding 
+	 * them into the algorithms HashMap. 
+	 * 
+	 */
 	public void createAlgo() {
 		BestFirstSearch myBestFirstSearch = new BestFirstSearch();
 		DFS myDFS = new DFS();
@@ -775,7 +789,13 @@ public class MyModel extends Observable implements Model {
 	
 	
 	
-	
+	/**
+	 * <h1>loadFromXml()</h1>
+	 * This loadFromXml() method loads game settings from an XML file
+	 * 
+	 * @param String name - represents the XML fie name.
+	 * 
+	 */
 	@Override
 	public void loadFromXml(String name) throws FileNotFoundException {
 		XMLDecoder decoder = null;
@@ -794,9 +814,6 @@ public class MyModel extends Observable implements Model {
 	
 	
 	
-	@Override
-	public Solution getSol() {
-		return namesToSolution.get(maze3dLastName);
-	}
+
 
 }
