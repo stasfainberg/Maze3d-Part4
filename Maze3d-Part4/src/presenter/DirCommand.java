@@ -9,11 +9,10 @@ import view.View;
  * @author Stas Fainberg
  * @version 1.0
  * 
- * show all the files and directory (folders) that are in <Path> -
- * - specific path of the file system Computer
+ * Shows all files and directories in a given path.
  * 
- * @param Model - Model of the Program
- * @param view - View  of the Program
+ * @param Model model - holds the Model class in this project.
+ * @param View view - holds the View class in this project.
  */
 
 
@@ -22,18 +21,17 @@ public class DirCommand implements Command {
 	private Model model;
 	private View view;
 	
-	/**
-	 * Constructor of DirCommand
-	 */ 
+	/****************************** Constructor **************************/ 
 	public DirCommand(Model model, View view) {
 		this.model = model;
 		this.view = view;
 	} 
 
-	/************************* doCommand() ***********************/
+	
+	/****************************** Methods **************************/ 
 	/**
-	 * the function call to dir() from MyModel
-	 * the function dir() display all the files and directory in the path
+	 * This doCommand() method calls the dir() method from the model data member.
+	 * dir() method displays all files and directories in a given path.
 	 */
 	@Override
 	public void doCommand(String[] args) {

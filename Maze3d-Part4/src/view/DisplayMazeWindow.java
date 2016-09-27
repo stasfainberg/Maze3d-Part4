@@ -38,10 +38,22 @@ public class DisplayMazeWindow extends Dialog {
 
 	/********************************* Getters & Setters *********************************/
 
+	/**
+	 * <h1>getMazeName()</h1>
+	 * This method getMazeName() returns the maze3d name.
+	 * 
+	 * @return mazeName - holds the Maze3d name.
+	 */
 	public String getMazeName() {
 		return mazeName;
 	}
 
+	/**
+	 * <h1>setMazeName()</h1>
+	 * This method setMazeName() sets the maze3d name according to the String which is passed to this method.
+	 * 
+	 * @param String mazeName - holds the maze3d name.
+	 */
 	public void setMazeName(String mazeName) {
 		this.mazeName = mazeName;
 	}
@@ -67,7 +79,7 @@ public class DisplayMazeWindow extends Dialog {
 	    }
 	  }
 
-	 /************** createContents *****************/
+	 /*********************************** createContents ************************************/
 	 /**
 	  * The method creates the dialog's contents
 	  * 

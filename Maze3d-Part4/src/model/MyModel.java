@@ -48,9 +48,12 @@ import presenter.Properties;
  * @author Stas Fainberg 
  * @version 1.0
  * 
+ * 
  * This class receives commands from the presenter and
- * executes them. when the model is done the message is 
+ * executes them. when the model is done message is 
  * sent to the presenter.
+ * 
+ * Class MyModel extends Observable implements Model.
  */
 public class MyModel extends Observable implements Model {
 
@@ -94,6 +97,13 @@ public class MyModel extends Observable implements Model {
 	
 	/*************************************** Getters & Setters *********************************************/
 
+	/**
+	 * <h1>getMaze()</h1>
+	 * This method getMaze() returns Maze3d according to a name which is passed to this method.
+	 * 
+	 * @param String name - holds the maze3d name which was created by the user.
+	 * @return Maze3d - holds the Maze3d which was associated by a name was passed to the method.
+	 */
 	@Override
 	public Maze3d getMaze(String name) {
 		if (mazes.containsKey(name))
@@ -102,33 +112,77 @@ public class MyModel extends Observable implements Model {
 			return null;
 	}
 
+	
+	/**
+	 * <h1>getMessage()</h1>
+	 * This method getMessage() returns String defines the message which is sent to the presenter.
+	 * 
+	 * @return String message - holds the string which is sent to the Presenter.
+	 */
 	@Override
 	public String getMessage() {
 		return message;
 	}
 
+	
+	/**
+	 * <h1>getMaze3d()</h1>
+	 * This method getMaze3d() returns Maze3d which defines the maze3d.
+	 * 
+	 * @return Maze3d - holds the maze3d which was created.
+	 */
 	@Override
 	public Maze3d getMaze3d() {
 		return this.maze3d;
 	}
 	
+	
+	/**
+	 * <h1>setMaze3d()</h1>
+	 * This method setMaze3d() set the variable maze3d to point the Maze3d which is passed to this method.
+	 * 
+	 */
 	public void setMaze3d(Maze3d maze3d) {
 		this.maze3d = maze3d;
 	}
 	
+	
+	
+	/**
+	 * <h1>getSol()</h1>
+	 * This method getSol() returns Solution which defines the maze solution.
+	 * 
+	 * @return Solution - holds the solution path to the goal.
+	 */
 	@Override
 	public Solution getSol() {
 		return namesToSolution.get(maze3dLastName);
 	}
 	
-	
+	/**
+	 * <h1>getHint()</h1>
+	 * This method getHint() returns Maze3dPosition which defines the maze3d hint.
+	 * 
+	 * @return Maze3dPosition hintPosition - holds the figure's next position on the path to the goal.
+	 */
 	@Override
 	public Maze3dPosition getHint() {
 		return hintPosition;
 	}
 	
-	/***************************************** Methods ***********************************************/
 	
+	
+	/***************************************** Methods ***********************************************/
+	/**
+	 * <h1>generateMaze()</h1>
+	 * This method generateMaze() is in charge for generating the maze3d.
+	 * 
+	 * @param String name - name of the maze.
+	 * @param int floor - maze3d floors number.
+ 	 * @param int rows - maze3d rows number.
+	 * @param int cols - maze3d columns number.
+	 * @param String algo - maze3d generator's algorithm name.
+	 */
 	@Override
 	public void generateMaze(String name, int floor, int rows, int cols, String algo) {
 
@@ -167,6 +221,9 @@ public class MyModel extends Observable implements Model {
 
 	}
 
+	
+	
+	
 	/**
 	 * <h1>saveMaze()</h1>
 	 * This function saveMaze() saves the maze data to a file.
@@ -881,7 +938,7 @@ public class MyModel extends Observable implements Model {
 	/**
 	 * <h1>createAlgo()</h1>
 	 * This createAlgo() method initiates the solving algorithms and adding 
-	 * them into the algorithms HashMap. 
+	 * them into the algorithm's HashMap. 
 	 * 
 	 */
 	public void createAlgo() {
