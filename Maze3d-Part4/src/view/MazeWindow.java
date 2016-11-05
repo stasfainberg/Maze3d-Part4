@@ -33,13 +33,10 @@ public class MazeWindow extends BasicWindow implements View {
 	/*********************************** Data Members *********************************/
 	private MazeDisplay mazeDisplay;
 	private Maze3d mymaze;
-
-
 	protected Solution sol;
 	String mazeNameString;
 	int count = 0;
 	Timer timer;
-
 	TimerTask task;
 
 	/**************************************** Methods **************************************/

@@ -1,5 +1,15 @@
 package view;
 
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -20,13 +30,14 @@ import org.eclipse.swt.widgets.Text;
  * @author Stas Fainberg
  * @version 1.0
  */
-public class DisplayMazeWindow extends Dialog {
+public class DisplayMazeWindow extends Dialog{
 
 	
 	/********************************* Data Members *********************************/
 	private String mazeName;
 	protected MessageBox messageBox = new MessageBox(getParent());
 	Display display;
+	int count;
 	
 	/********************** Constructor of DisplayMazeWindow ************************/
 	public DisplayMazeWindow(Shell parent, Display display) {
@@ -94,14 +105,15 @@ public class DisplayMazeWindow extends Dialog {
 	    GridData data = new GridData();
 	    data.horizontalSpan = 2;
 	    label_name.setLayoutData(data);
-
+	    
+	    
 	    // Display the input box
 	    final Text text = new Text(shell, SWT.BORDER);
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    data.horizontalSpan = 2;
 	    text.setLayoutData(data);
 	    
-	    
+	   
 	    /********************** grayed out **********************/
 	    text.setForeground(display.getSystemColor(SWT.COLOR_GRAY));
         text.setText("Enter maze name");
@@ -191,6 +203,8 @@ public class DisplayMazeWindow extends Dialog {
 			messageBox.setMessage(s);
 			messageBox.open();
 		}
+
+
 		
 		
 		
