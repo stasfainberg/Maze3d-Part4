@@ -27,6 +27,8 @@ public class DisplayMessageCommand implements Command {
 	@Override
 	public void doCommand(String[] args) {
 		String msg = model.getMessage();
+		
+		view.setMyMazesNames(model.getMazesNames());
 		view.displayMessage(msg);
 	}
 	

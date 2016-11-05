@@ -66,6 +66,7 @@ public class MyModel extends Observable implements Model {
 	private HashMap<String, CommonMaze3dGenerator> solvealgo = new HashMap<String, CommonMaze3dGenerator>();
 	private HashMap<String, CommonSearcher> algorithms = new HashMap<String, CommonSearcher>();
 	private HashMap<String, Solution> namesToSolution = new HashMap<String, Solution>();
+	ArrayList<String> mazesNames = new ArrayList<String>();
 
 	Maze3d maze3d;
 	String maze3dLastName;
@@ -171,6 +172,14 @@ public class MyModel extends Observable implements Model {
 	}
 	
 	
+	@Override
+	public ArrayList<String> getMazesNames() {
+		return mazesNames;
+	}
+	
+	
+	
+	
 	
 	/***************************************** Methods ***********************************************/
 	/**
@@ -216,6 +225,7 @@ public class MyModel extends Observable implements Model {
 		}
 
 		setChanged();
+		mazesNames.add(name);
 		this.message = "Maze '" + name + "' is ready";
 		notifyObservers("display_message");
 

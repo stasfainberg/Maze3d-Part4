@@ -1,6 +1,8 @@
 package view;
 
 
+import java.util.ArrayList;
+
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Maze3dPosition;
 import algorithms.search.Solution;
@@ -16,6 +18,7 @@ public interface View {
 	void Display(Maze3d maze3d);
 	void displayMazeSolution(Solution sol);
 	void displayMazeHint(Maze3dPosition hint1);
+	void setMyMazesNames(ArrayList<String> myArray);
 	void start();
 
 	

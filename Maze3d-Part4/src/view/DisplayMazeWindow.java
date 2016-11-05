@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,6 +17,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -38,12 +40,17 @@ public class DisplayMazeWindow extends Dialog{
 	protected MessageBox messageBox = new MessageBox(getParent());
 	Display display;
 	int count;
+	ArrayList<String> myMazesNames2 = new ArrayList<String>();
+
 	
+
+
+
 	/********************** Constructor of DisplayMazeWindow ************************/
-	public DisplayMazeWindow(Shell parent, Display display) {
+	public DisplayMazeWindow(Shell parent, Display display, ArrayList<String> myMazesNames2) {
 		super(parent);
 		this.display = display;
-		// TODO Auto-generated constructor stub
+		setMyMazesNames2(myMazesNames2);
 	}
 	
 
@@ -69,7 +76,14 @@ public class DisplayMazeWindow extends Dialog{
 		this.mazeName = mazeName;
 	}
 	
-	
+	public ArrayList<String> getMyMazesNames2() {
+		return myMazesNames2;
+	}
+
+
+	public void setMyMazesNames2(ArrayList<String> myMazesNames2) {
+		this.myMazesNames2 = myMazesNames2;
+	}
 	
 	/********************************* Methods *********************************/
 
@@ -107,43 +121,61 @@ public class DisplayMazeWindow extends Dialog{
 	    label_name.setLayoutData(data);
 	    
 	    
-	    // Display the input box
-	    final Text text = new Text(shell, SWT.BORDER);
-	    data = new GridData(GridData.FILL_HORIZONTAL);
-	    data.horizontalSpan = 2;
-	    text.setLayoutData(data);
 	    
-	   
-	    /********************** grayed out **********************/
-	    text.setForeground(display.getSystemColor(SWT.COLOR_GRAY));
-        text.setText("Enter maze name");
+	    
+		 /*********************************** ComboBox ************************************/
 
-        text.addListener(SWT.FocusOut, new Listener()
-        {
-            @Override
-            public void handleEvent(Event arg0)
-            {
-                if("".equals(text.getText()))
-                {
-                    text.setForeground(display.getSystemColor(SWT.COLOR_GRAY));
-                    text.setText("Enter maze name");
-                }
-            }
-        });
+	    final Combo combo = new Combo(shell, SWT.NULL);
+	    combo.setText("Choose a maze");
+	    
+//	    String[] languages = new String[]{"DFS", "BestFirstSearch"};
+	    
+	    for(int i=0; i<myMazesNames2.size(); i++)
+	      combo.add(myMazesNames2.get(i));
+	    
 
-        text.addListener(SWT.FocusIn, new Listener()
-        {
-            @Override
-            public void handleEvent(Event arg0)
-            {
+	    
+	    
+		 /*********************************** ComboBox ************************************/
 
-                if("Enter maze name".equals(text.getText()))
-                {
-                    text.setForeground(display.getSystemColor(SWT.COLOR_BLACK));
-                    text.setText("");
-                }
-            }
-        });
+	    
+//	    // Display the input box
+//	    final Text text = new Text(shell, SWT.BORDER);
+//	    data = new GridData(GridData.FILL_HORIZONTAL);
+//	    data.horizontalSpan = 2;
+//	    text.setLayoutData(data);
+//	    
+//	   
+//	    /********************** grayed out **********************/
+//	    text.setForeground(display.getSystemColor(SWT.COLOR_GRAY));
+//        text.setText("Enter maze name");
+//
+//        text.addListener(SWT.FocusOut, new Listener()
+//        {
+//            @Override
+//            public void handleEvent(Event arg0)
+//            {
+//                if("".equals(text.getText()))
+//                {
+//                    text.setForeground(display.getSystemColor(SWT.COLOR_GRAY));
+//                    text.setText("Enter maze name");
+//                }
+//            }
+//        });
+//
+//        text.addListener(SWT.FocusIn, new Listener()
+//        {
+//            @Override
+//            public void handleEvent(Event arg0)
+//            {
+//
+//                if("Enter maze name".equals(text.getText()))
+//                {
+//                    text.setForeground(display.getSystemColor(SWT.COLOR_BLACK));
+//                    text.setText("");
+//                }
+//            }
+//        });
 
         Label label = new Label(shell, SWT.NONE);
         label.setFocus();
@@ -162,15 +194,17 @@ public class DisplayMazeWindow extends Dialog{
 	      @Override
 		public void widgetSelected(SelectionEvent event) {
 	        
-	    	  if (text.getText().equals(""))
+	    	  if (combo.getSelectionIndex() == -1)
 				{
 
-					sendMessage("Please type maze name");
+					sendMessage("Please choose maze name");
 					
 				} else 
 				{
-			    	  mazeName = text.getText();
-				      shell.close();
+					int comboSelectedIndex = combo.getSelectionIndex();
+					String selectedMaze = myMazesNames2.get(comboSelectedIndex);
+					mazeName = selectedMaze;
+					shell.close();
 				}
 
 	      }

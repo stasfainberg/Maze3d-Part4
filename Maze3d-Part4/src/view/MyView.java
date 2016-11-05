@@ -130,6 +130,12 @@ public class MyView extends Observable implements View,Observer {
 		
 	}
 
+	@Override
+	public void setMyMazesNames(ArrayList<String> myArray) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 	

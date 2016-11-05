@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,6 +39,8 @@ public class MazeWindow extends BasicWindow implements View {
 	int count = 0;
 	Timer timer;
 	TimerTask task;
+	ArrayList<String> myMazesNames = new ArrayList<String>();
+
 
 	/**************************************** Methods **************************************/
 	@Override
@@ -185,7 +188,7 @@ public class MazeWindow extends BasicWindow implements View {
 		btnDisplayMaze.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				DisplayMazeWindow displayMazeWindow = new DisplayMazeWindow(shell, display);
+				DisplayMazeWindow displayMazeWindow = new DisplayMazeWindow(shell, display, myMazesNames);
 				displayMazeWindow.initWidgets();
 				
 				if(displayMazeWindow.getMazeName() != null){
@@ -363,6 +366,22 @@ public class MazeWindow extends BasicWindow implements View {
 		mazeDisplay.goToHint(hint1);
 		
 	}
+	
+	
+	public void setMyMazesNames(ArrayList<String> myArray){
+		this.myMazesNames = myArray;
+	}
+
+	public ArrayList<String> getMyMazesNames(){
+		return myMazesNames;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

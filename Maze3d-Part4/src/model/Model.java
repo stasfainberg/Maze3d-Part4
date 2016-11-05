@@ -1,6 +1,7 @@
 package model;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import algorithms.mazeGenerators.Maze3d;
@@ -36,6 +37,7 @@ public interface Model {
 	void loadFromXml(String name) throws FileNotFoundException;
 	Solution getSol();
 	Maze3dPosition getHint();
+	ArrayList<String> getMazesNames();
 
 	
 	
